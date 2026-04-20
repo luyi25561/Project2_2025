@@ -4,12 +4,12 @@ from email.message import EmailMessage
 import time
 from datetime import datetime
 
-# 邮箱配置
+# Email Configuration
 FROM_EMAIL = "1794302485@qq.com"
 FROM_PWD = "lxgzrskjolbtcefb"
 TO_EMAIL = ["3533438190@qq.com","3264812538@qq.com"]
 
-# GPIO设置
+# GPIO Settings
 channel = 4
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(channel, GPIO.IN)
@@ -22,32 +22,32 @@ def send_email(status):
     msg.set_content(body)
     msg['From'] = FROM_EMAIL
     msg['To'] = TO_EMAIL
-    msg['Subject'] = "🌱 植物浇水提醒"
+    msg['Subject'] = "🌱 Plant Watering Reminder"
 
     server = smtplib.SMTP('smtp.qq.com', 587)
     server.starttls()
     server.login(FROM_EMAIL, FROM_PWD)
     server.send_message(msg)
     server.quit()
-    print("提醒邮件已发送")
+    print("Reminder email sent")
 
-# 单次检测
+# Single check
 def check_soil():
     moisture = GPIO.input(channel)
     if moisture == 1:
-        status = "土壤湿润 ✅ 无需浇水"
+        status = "Soil is moist ✅ No watering needed"
     else:
-        status = "土壤干燥 ⚠️ 请立即浇水！"
+        status = "Soil is dry ⚠️ Please water the plant now!"
     print(status)
     send_email(status)
 
-# 主程序：每天测4次（每6小时一次）
+# Main program
 if __name__ == "__main__":
     try:
-        print("植物湿度监测已启动...")
+        print("Plant soil moisture monitoring has been activated...")
         while True:
             check_soil()
-            print("等待6小时后下次检测...\n")
-            time.sleep(6 * 3600)  # 6小时
+            print("Next check in 4 hours...\n")
+            time.sleep(4 * 3600)  # 4小时
     except KeyboardInterrupt:
         GPIO.cleanup()
