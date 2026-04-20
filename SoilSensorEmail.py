@@ -4,10 +4,10 @@ from email.message import EmailMessage
 import time
 from datetime import datetime
 
-# 邮箱配置（改成你自己！）
-FROM_EMAIL = "3264812538@qq.com"
-FROM_PWD = "hnwpikeskvwxdbca"
-TO_EMAIL = "3533438190@qq.com"
+# 邮箱配置
+FROM_EMAIL = "1794302485@qq.com"
+FROM_PWD = "lxgzrskjolbtcefb"
+TO_EMAIL = ["3533438190@qq.com","3264812538@qq.com"]
 
 # GPIO设置
 channel = 4
