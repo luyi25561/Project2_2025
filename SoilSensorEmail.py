@@ -14,7 +14,7 @@ channel = 4
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(channel, GPIO.IN)
 
-# 发邮件函数
+# Send Email
 def send_email(status):
     msg = EmailMessage()
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
